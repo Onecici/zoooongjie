@@ -1,0 +1,29 @@
+{
+	"React快速创建reducer切片模块": {
+		"prefix": "createReactSlice",
+		"body": [
+			"import { createSlice } from '@reduxjs/toolkit';",
+			"",
+			"const ${1:app}Slice = createSlice({",
+			"name: 'app',",
+			"initialState: {},",
+			"reducers: {}",
+			"})",
+			"",
+			"export const { } = ${1:app}Slice.actions;",
+			"export const { reducer: ${1:app}Reducer } = ${1:app}Slice;",
+		],
+		"description": "React快速创建reducer切片模块"
+	},
+	"React快速创建css-in-js模块": {
+		"prefix": "createReactStyle",
+		"body": [
+			"import styled from 'styled-components';",
+			"",
+			"export default styled.div`",
+			"",
+			"`",
+		],
+		"description": "React快速创建css-in-js模块"
+	},
+}

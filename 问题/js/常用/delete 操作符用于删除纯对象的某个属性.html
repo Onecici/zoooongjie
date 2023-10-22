@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: "哈哈撒娇",
+            age: 85
+        }
+        delete obj.age
+        console.log(obj); // name: "哈哈撒娇",
+        // delete用来删除js对象的属性，不能删除任何变量（全局、局部、原型链中的变量）
+        // new出来的对象中的属性可以删除因为是一个对象
+    </script>
+</body>
+
+</html>

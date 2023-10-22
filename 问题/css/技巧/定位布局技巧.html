@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .topNav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 75px;
+            background-color: gold;
+        }
+
+        .bottom {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 75px;
+            background-color: khaki;
+        }
+
+
+        /* 注意看.center盒子top值和bottom值都设置px的效果 */
+        .center {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 75px;
+            bottom: 75px;
+            z-index: 999;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topNav"></div>
+    <div class="center">中间内容</div>
+    <div class="bottom"></div>
+    <script>
+
+    </script>
+</body>
+
+</html>

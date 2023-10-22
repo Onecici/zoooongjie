@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+                               // 箭头函数👇只包含一个表达式可以省略return
+        const result = words.filter(item => item.length > 6);
+        console.log(result);
+        // return 后面是判断条件 如果结果满足 就会返回当前循环的item数据到新数组内
+
+
+        const newArr = words.filter(check)  // 数据拆分写法
+        function check(item) {
+            return item.length > 6
+        }
+        console.log(newArr);
+    </script>
+</body>
+
+</html>

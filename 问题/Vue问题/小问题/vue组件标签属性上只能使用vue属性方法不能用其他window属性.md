@@ -1,0 +1,9 @@
+如果input绑定v-model 没有带value值时 v-mode会得到布尔值传入data中
+
+如果带有value属性就将当前点击的value数据传入到data中
+
+
+给多个input绑定v-model同一个data数据时  这个data中数据用数组来接收 这样就可以实现多选框了
+
+实现全选框效果就是当点击了全选就触发事件将多选框所有value值 全部输入到v-model绑定的data数据里面就实现全选了
+取消全选就直接数组为空

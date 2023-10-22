@@ -1,0 +1,127 @@
+{
+    "tabnine.experimentalAutoImports": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "explorer.confirmDelete": false,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "Wscats.eno"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "Wscats.eno"
+    },
+    "gitlens.advanced.fileHistoryFollowsRenames": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "cssrem.rootFontSize": 37.5,
+    "px2vw.toFixedNum": 3,
+    "px-to-vw.viewportWidth": 375,
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json",
+                "jsonc"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautifyrc"
+            ]
+        },
+        "css": [
+            "css",
+            "less",
+            "scss"
+        ],
+        "html": [
+            "htm",
+            "html",
+            "vue"
+        ]
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "eslint.enable": true,
+    "eslint.run": "onType",
+    "eslint.options": {
+        "extensions": [
+            ".js",
+            ".vue",
+            ".jsx",
+            ".tsx"
+        ]
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "[less]": {
+        "editor.defaultFormatter": "Wscats.eno"
+    },
+    "less.compile": {
+        "compress": false, // 是否删除多余空白字符
+        "sourceMap": false, // 是否创建文件目录树，true的话会自动生成一个 .css.map 文件
+        "out": true, // 是否编译输出文件
+        "outExt": ".css", // 输出文件的后缀,默认为.css
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "cssrem.vw": true,
+    "cssrem.vwDesign": 375,
+    "editor.codeLens": false,
+    "vetur.completion.scaffoldSnippetSources": {
+        "workspace": "💼",
+        "user": "🗒️",
+        "vetur": "✌"
+    },
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "vetur.format.options.tabSize": 4, // 缩进空格间距
+    "vetur.format.options.useTabs": false,
+    "vetur.format.defaultFormatterOptions": {
+        "js-beautify-html": {
+            "wrap_attributes": "auto"
+        },
+        "prettyhtml": {
+            "printWidth": 100,
+            "singleQuote": false,
+            "wrapAttributes": false,
+            "sortAttributes": false
+        }
+    },
+    "eslint.codeActionsOnSave.rules": null,
+    "vetur.validation.template": false,
+    "volar.format.initialIndent": {
+        "html": true,
+    },
+    "explorer.compactFolders": false,
+    "files.eol": "\n",
+    "settingsSync.ignoredExtensions": [],
+    "[scss]": {
+        "editor.defaultFormatter": "Wscats.eno"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "Wscats.eno"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "bracket-pair-colorizer-2.depreciation-notice": false,
+    // "editor.formatOnSave": true,
+    // "editor.formatOnType": true,
+    // "eslint.format.enable": true,
+}

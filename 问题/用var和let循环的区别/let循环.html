@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>ABC</button>
+    <button>ABC123</button>
+    <script>
+        // var循环
+        // 因为var是全局作用域 全局的变量i只能有一个  所以每次循环都会覆盖上一次用var声明i的变量值
+        let btns = document.querySelectorAll('button')
+        for (var i = 0; i < btns.length; ++i) {
+            console.log(i);
+            // 每次循环绑定按钮 function函数里的i只有点击触发时才会获取  此时获取的i是var最后循环结束的数字
+            btns[i].onclick = function() {
+                console.log(i);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

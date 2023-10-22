@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const a = 100;
+        const ab = 'ABC'
+        const obj = {
+            name: '小直'
+        };
+        const fn = function (a, ab, o) { // 这里是函数所有的形参相当于是函数内的变量 函数内的a=函数外的a  
+            // 简单数据类型重新赋值：失去引用效果
+            a = 20;   // 如果重新赋值  会在内存中开辟一个新的空间进行存储 所以该a值只能在当前作用域下获取
+            ab = '123'
+            o.name = '杠杠' // 对象使用的是引用赋值。当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在堆中的地址，而不是堆中的数据。如果重新给新的变量赋值一个新对象将会失去引用效果 所以可以修改该地址下的name属性
+            const fn1 = function () {
+                console.log(a);
+                console.log(ab);
+                console.log(o);
+            }
+            fn1()
+        }
+        fn(a, ab, obj);
+        console.log(a);
+        console.log(ab);
+        console.log(obj);
+    </script>
+</body>
+
+</html>

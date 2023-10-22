@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="原型链找顶级父亲Function.png" alt="">
+    <script>
+        // JS中所有的原型对象都是Object创建的
+
+        function Student() { }
+
+        let s = new Student();  // 创建个构造函数
+
+
+
+        // 原型会自动继承   所有的原型对象都会继承Object的原型对象
+        console.log(Object.prototype === s.__proto__);  // false
+        console.log(Object.prototype === s.__proto__.__proto__);    // true
+        
+        // console.log(Object.prototype === s.__proto__.constructor.__proto__.__proto__); true
+        // 可以省略上面的.__proto__.constructor直接用.constructor
+
+        // s.constructor指向的是没有new之前的构造函数Student
+        console.log(Object.prototype === s.constructor.__proto__.__proto__);   // true   s.constructor重新指回了Student构造函数 又从__proto__找到当前构造函数的顶级父亲Function  所有的构造函数的原型对象都会继承Object的原型对象 所以顶级父亲也继承
+        // 原型对象存在继承关系   所有的构造函数的原型对象都会继承Object的原型对象
+
+        // Object的原型是顶级原型对象 再往上就是null空了
+        console.log(Object.prototype.__proto__);    // null
+    </script>
+</body>
+
+</html>

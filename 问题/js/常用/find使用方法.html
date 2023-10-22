@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [
+            {
+                name: 'Lini'
+            },
+            {
+                name: 'heihie'
+            }
+        ]
+        let a = arr.find(item => item.name === 'heihie')  // 当条件成立会停止循环并返回当前item数据 
+        a.name = 'cc'  // 如果当前item数据是复杂数据类型那么就会存在引用关系 此时修改对象中的某个属性就会影响到原数据中的对象
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+
+        button {
+            position: fixed;
+            right: 100px;
+            bottom: 100px;
+        }
+
+        #box {
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #888;
+            padding: 10px;
+            overflow-y: auto;
+
+        }
+
+        #box::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        #box::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: #ccc
+        }
+
+        #box::-webkit-scrollbar-track-piece {
+            background-color: transparent;
+        }
+
+        .box2 {
+            width: 100%;
+            height: 800px;
+            background-color: rebeccapurple;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击返回顶部</button>
+    <div id="box">
+        <div class="box2"></div>
+    </div>
+    <script>
+        let btn = document.querySelector('button')
+        let box = document.querySelector('#box')
+        btn.addEventListener('click', () => {
+            // 谁开启了滚动条overflow-y或者window自己 那就找到当前是哪个元素开启了滚动条然后调用scrollTo方法
+            box.scrollTo({
+                top: 0,
+                behavior: "smooth" // 设置滚动效果  smooth表示平滑滚动
+            })
+        })
+    </script>
+</body>
+
+</html>

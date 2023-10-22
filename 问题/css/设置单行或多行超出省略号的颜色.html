@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .box {
+        max-width: 200px;
+        max-height: 100px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- 设置省略号的颜色就是在省略号的父元素上设置color即可 -->
+    <div style="color: red;">
+      <div class="box">这是一段很长的文本，将根据元素的大小进行缩放。</div>
+    </div>
+  </body>
+</html>

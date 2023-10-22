@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>雾里有果橙</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .TheCircle {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid black;
+        }
+
+        .Water {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(23, 106, 201);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+
+        .Water::before {
+            content: '';
+            position: absolute;
+            top: -50%; /* 获取当前数据计算百分比然后通过top值显示当前数据占用百分比值 */
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            border-radius: 40%;
+            background-color: rgb(240, 228, 228);
+            animation: virtual 7s linear infinite;
+        }
+
+        @keyframes virtual {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="TheCircle">
+        <div class="Water"></div>
+    </div>
+</body>
+
+</html>

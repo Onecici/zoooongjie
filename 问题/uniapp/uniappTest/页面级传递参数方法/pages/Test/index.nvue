@@ -1,0 +1,42 @@
+<template>
+	<view>
+		<text>测试页面</text>
+		<button @click="goBack">点击返回(保留缓存)</button>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+
+			}
+		},
+		onLoad() {
+			// 页面传参方式2-4 监听上级页面传来的事件
+			this.eventChannel.on('gData', function(data) {
+				console.log(data)
+			})
+		},
+		computed:{
+			eventChannel() {
+				return this.getOpenerEventChannel(); // 页面传参方式2-3 使用该方法才能监听上级页面传来的事件
+			}
+		},
+		// 监听页面返回事件
+		onBackPress() {
+			// 页面传参方式1-3
+			uni.$emit('add', {
+				name: '哈哈'
+			})
+			
+			// 页面传参方式2-5 向上级页面抛出事件
+			this.eventChannel.emit('backData', 'backData~~~Hello')
+			return false;
+		}
+	}
+</script>
+
+<style>
+
+</style>

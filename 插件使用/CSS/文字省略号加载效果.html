@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dot {
+            font-family: simsun;
+            /*固定字体避免设置的宽度无效*/
+            animation: dot 3s infinite step-start;
+            display: inline-block;
+            width: 1.5em;
+            vertical-align: bottom;
+            /*始终让省略号在文字的下面*/
+            overflow: hidden;
+        }
+
+        @keyframes dot {
+
+            /*动态改变显示宽度, 但始终让总占据空间不变, 避免抖动*/
+            0% {
+                width: 0;
+                margin-right: 1.5em;
+            }
+
+            33% {
+                width: .5em;
+                margin-right: 1em;
+            }
+
+            66% {
+                width: 1em;
+                margin-right: .5em;
+            }
+
+            100% {
+                width: 1.5em;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text"><span class="dot">...</span></div>
+</body>
+
+</html>

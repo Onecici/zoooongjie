@@ -1,0 +1,105 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "home",
+				"app-plus": {
+					"titleNView": {
+						// 配置搜索框
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "请输入搜索内容",
+							"disabled": false
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/about/index",
+			"style": {
+				"navigationBarTitleText": "about",
+				"app-plus": {
+					"titleNView": {
+						// 配置搜索框
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "请输入搜索内容",
+							"disabled": false
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/shopInfo/shopInfo",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "请输入搜索内容",
+							"disabled": false
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/webViewTest/webViewTest",
+			"style": {
+				"navigationBarTitleText": "webView测试"
+			}
+		},
+		{
+			"path": "pages/interiorCmpTest/index",
+			"style": {
+				"navigationBarTitleText": "内置组件测试"
+			}
+		}
+	],
+	// 底部菜单配置
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"color": "#959DB0", // 未选中时文字颜色
+		"selectedColor": "#000", // 选中时的文字颜色
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/about/index",
+				"text": "关于"
+			},
+			{
+				"pagePath": "pages/webViewTest/webViewTest",
+				"text": "webView测试"
+			},
+			{
+				"pagePath": "pages/interiorCmpTest/index",
+				"text": "内置组件测试"
+			}
+		]
+	},
+	// 全局样式设置
+	"globalStyle": {
+		// 带有navigationBar前缀 都是设置顶部样式的属性
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		// 隐藏头部导航栏  单个隐藏pages数组中每个对象去设置
+		"app-plus": {
+			"titleNView": false //禁用原生导航栏  
+		}
+	},
+	"uniIdRouter": {}
+}

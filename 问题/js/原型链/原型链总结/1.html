@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Stuc(name) {
+            this.name = name;
+            this.sing = () => {
+                console.log(123);
+            };
+        };
+        Stuc.prototype.sing = function () {
+            console.log('说话');
+        };
+        let s1 = new Stuc('张三');
+        s1.sing();  //先看Stuc构造函数中是否定义有sing这个方法有就执行  如果没有因为s1下有__proto__的存在,就去Stuc构造函数原型对象prototype身上去查找sing这个方法
+        console.log(Stuc.prototype === s1.__proto__); // 这两个都指向了Stuc的构造函数的原型
+        console.log(s1);
+
+        // 作用是可以为构造函数设置通用的函数和方法 以节省内存空间 数据共享
+        // 原型可以解决 防止全局污染的问题 不占用内存
+
+    </script>
+</body>
+
+</html>

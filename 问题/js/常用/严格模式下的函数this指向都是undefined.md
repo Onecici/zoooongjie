@@ -1,0 +1,4 @@
+class类中所有函数都是严格模式  即使你把函数体赋值给一个变量时此时也是获取到undefined
+在用babel类型下写代码进行jsx代码转换的时候也是默认启用严格模式
+
+严格模式中this指向都是undefined而不是window

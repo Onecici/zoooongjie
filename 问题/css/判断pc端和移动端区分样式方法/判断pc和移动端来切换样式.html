@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="pcOrmobile"></div>
+  <script>
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      console.log('移动端');
+      // 移动设备样式
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = './css/mobile.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    } else {
+      console.log('Pc端');
+      // PC 设备样式
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = './css/pc.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+
+  </script>
+</body>
+
+</html>

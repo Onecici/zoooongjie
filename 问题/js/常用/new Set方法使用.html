@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./myFn.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 50px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Set方法可以去重  复杂数据类型判断引用地址是否一致来进行去重
+        const s = new Set()
+        s.add(1)
+        s.add(2)
+        s.add(3)
+        s.add(1)  // Set方法是无序结构 因为当前这里添加的数据被去重了 不能保证顺序一致性 
+        console.log(s); // {1,2,3}  
+
+
+
+
+
+
+        // 总结👇👇👇👇👇👇
+        // Set方法因为是无序结构所以操作性能很快  
+        // 当一个数据中如果不需要有序结构(arr, Map) 可以使用这种方式存储数据
+
+
+        // 性能排行    
+        // 无序 > 有序
+    </script>
+</body>
+
+</html>

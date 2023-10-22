@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  li {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .left {
+    flex: 1;
+    background-color: gainsboro;
+  }
+
+  .right {
+    flex: 5;
+    background-color: forestgreen;
+  }
+</style>
+
+<body>
+  <header style="width: 100%;height: 30px;"></header>
+  <div class="box">
+    <ul class="left">
+      <li>首页</li>
+      <li>用户管理</li>
+      <li>权限管理</li>
+      <li>设置</li>
+    </ul>
+    <div class="right"></div>
+  </div>
+  <script>
+
+
+
+    const PubSub = {
+      message: {},
+      // 发布订阅(获取message中指定属性并调用里面所有已存储的函数方法)
+      publish(type, data) {
+        if (!this.message[type]) return
+        this.message[type].forEach(item => item(data))
+      },
+      // 订阅消息(将函数方法存储起来，方便进行管理)
+      subscribe(type, messageFn) {
+        if (messageFn instanceof Function) {
+          if (!this.message[type]) {
+            this.message[type] = [messageFn]
+          } else {
+            this.message[type].push(messageFn)
+          }
+        } else {
+          throw new Error('第二个参数必须为函数类型')
+        }
+      },
+      // 取消订阅(将message中已经存储的属性删除)
+      unsubscribe(type, messageFn) {
+        if (!this.message[type]) return
+
+        if (messageFn) {
+          const messageIndex = this.message[type].findIndex(item => item === messageFn)
+          this.message[type].splice(messageIndex, 1)
+        } else {
+          Reflect.deleteProperty(this.message, type)
+        }
+      }
+    }
+
+    function TestA(data) {
+      console.log(data);
+    }
+
+    function TestB1(data) {
+      console.log('我是B1:', data);
+    }
+
+    function TestB2(data) {
+      console.log('我是B2:', data);
+    }
+
+    PubSub.subscribe('A', TestA)
+    PubSub.subscribe('B', TestB1)
+    PubSub.subscribe('B', TestB2)
+
+    PubSub.unsubscribe('B', TestB1) // 取消对应已订阅的方法
+
+    PubSub.publish("B", 123456)
+    PubSub.publish("A", 8888888)
+
+  </script>
+</body>
+
+</html>

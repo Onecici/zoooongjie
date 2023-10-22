@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <script>
+        // toString()方法有两种作用
+        // 当一个对象 .toString() 时会输出[object Object] 第一个值不用管 只看第二个值 这第二个值是调用者的数据类型 所以它可以做判断数据类型
+        // 其他类型数据直接使用 .toString 方法时,会直接返回字符串
+
+        console.log([1, 2, 3].toString()); // 1,2,3
+
+        // 不是对象类型的数据需要获取这个数据的类型需要改变Object.prototype.toString()这个方法里面的this指向需要获取数据类型的数据
+        Object.prototype.toString.call('An') // "[object String]"
+        Object.prototype.toString.call(1) // "[object Number]"
+        Object.prototype.toString.call(Symbol(1)) // "[object Symbol]"
+        Object.prototype.toString.call(null) // "[object Null]"
+        Object.prototype.toString.call(undefined) // "[object Undefined]"
+        Object.prototype.toString.call(function () { }) // "[object Function]"
+
+        // 从这里可以看出 当一个数据想实现一个方法的时候没有的话 可以去找实现对应方法的原型对象上的方法然后改变this指向没有该方法的数据 从而实现这个方法一样的效果
+        //  比如👇👇👇👇👇👇👇
+
+        let n = "123456" // 字符是没有forEach方法的
+        Array.prototype.forEach.call(n, (item, index) => {
+            console.log(item); // 字符串也是有下标的 所以字符串是支持forEach循环的
+        })
+
+
+        let obj = {
+            name: 567,
+            age: 18
+        }
+        Array.prototype.forEach.call(obj, (item, index) => {
+            console.log(item); // 对象本身就不能用forEach循环
+        })
+
+        // 第二种了解就好 万不得已的时候才用 因为它返回的是字符串形式的 效率会滞后很多 还不如instanceof
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        .box {
+            width: 200px;
+            height: 100px;
+            color: #fff;
+        }
+
+        .sm {
+            width: 50px;
+            height: 50px;
+            background-color: inherit;
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button id="one" style="width: 50px;">1</button>
+        <button id="two" style="width: 50px;">2</button>
+    </div>
+    <a id="aaaaa" href="asa">1212</a>
+
+    <script type="text/javascript">
+        one.onclick = (event) => {
+            console.log(getEventPath(event));
+        }
+
+        // 获取事件操作元素冒泡层级路径兼容写法
+        function getEventPath(event) {
+            if (event.path) {
+                return event.path;
+            }
+            let target = event.target;
+
+            event.path = [];
+            while (target.parentNode !== null) {
+                event.path.push(target);
+                target = target.parentNode;
+            }
+            event.path.push(document, window);
+            return event.path;
+        }
+
+    </script>
+
+
+</body>
+
+</html>

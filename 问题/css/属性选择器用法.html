@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /*
+            表示选择所有元素中带有class属性的元素并且class属性值中要包含有active字符串    
+            *号表示查询匹配属性中的所有字符串
+        */
+        [class*=" active"] {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        /* 
+            表示选择所有.box元素上带有class属性的元素且属性中开头必须是active字符串    
+            ^号表现查询匹配开头
+            $号表示查询匹配结尾
+        */
+        .box[class^="active"] {
+            width: 100px;
+            height: 100px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box active">
+
+    </div>
+    <div class="active box">
+
+    </div>
+</body>
+
+</html>

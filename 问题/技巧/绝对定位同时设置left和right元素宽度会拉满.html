@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .box {
+        position: relative;
+        width: 200px;
+        height: 400px;
+        margin: 100px auto;
+        border: 1px solid gray;
+    }
+    button { /* 绝对定位后当前元素会在父盒子内浮动 同时设置left和right时元素宽度会撑满 如果同时设置左右边距时相当于是内边距 */
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <button>a</button>
+    </div>
+</body>
+
+</html>

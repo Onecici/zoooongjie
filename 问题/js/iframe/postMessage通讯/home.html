@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点击向iframe传输数据</button>
+    <iframe id="iframe1" src="./chird.html" frameborder="1"></iframe>
+
+    <script>
+        const btn = document.querySelector('#btn')
+        const iframe1 = document.querySelector("#iframe1")
+
+        btn.addEventListener('click', () => {
+            // 向iframe发送数据
+            iframe1.contentWindow.postMessage('我是iframe的父级', '*')
+        })
+
+        // 接收postMessage传来的数据
+        window.addEventListener('message', (e) => {
+            console.log(e.data);
+        })
+    </script>
+</body>
+
+</html>

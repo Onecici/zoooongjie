@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 5
+        var a = 10
+        console.log(a); // 10  var可以重复声名变量
+        console.log(window.a); // var声名的全局变量会保存在window对象属性里
+
+        function Myfun() {
+            var b = 5
+        }
+        console.log(b); // 只有函数才能限制var作用域
+        // var在全局声名时 声名会提升到整个代码的第一行
+        // var在函数声名时 声名会提升到当前函数代码的第一行
+    </script>
+</body>
+
+</html>

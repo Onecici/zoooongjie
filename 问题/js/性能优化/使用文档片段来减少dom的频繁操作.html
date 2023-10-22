@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./myFn.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="list">
+
+    </ul>
+    <script>
+        const list = document.querySelector('.list')
+
+        // 创建文档片段  用于临时存储dom数据然后统一append到某个dom元素中
+        const fags = document.createDocumentFragment()
+
+        for (let i = 0; i < 5; i++) {
+            const li = document.createElement('li')
+            li.textContent = i
+            fags.appendChild(li)
+        }
+        document.body.appendChild(fags)
+    </script>
+</body>
+
+</html>

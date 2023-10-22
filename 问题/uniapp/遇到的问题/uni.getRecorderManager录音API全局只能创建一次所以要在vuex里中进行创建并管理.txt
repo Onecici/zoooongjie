@@ -1,0 +1,1 @@
+uni.getRecorderManager录音API全局只能创建一次所以要在vuex里中进行创建并管理

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./mmenu.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="./jquery.mmenu.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 菜单主体 -->
+    <nav id="my-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
+    </nav>
+
+    <!-- 内容主体 -->
+    <div style="width: 100%;height:800px;background: #ccc;">
+        <!-- 2.通过href中指定对应菜单id名称即可打开菜单 -->
+        <a href="#my-menu">打开菜单</a>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // 1.选择需要创建的菜单元素盒子即可
+            $("#my-menu").mmenu({
+                // 更多配置...
+            });
+        });
+        // 3.菜单主体和内容主体必须分开写
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket.IO Client</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+
+<body>
+    <input type="text">
+    <button>发送消息</button>
+    <button class="getData">获取数据</button>
+    <script>
+        const btn = document.querySelector('button')
+        const getDataBtn = document.querySelector('.getData')
+        const ipt = document.querySelector('input')
+        const userInfo = {
+            id: Date.now(),
+            nick: 'oneoneCCC'
+        }
+
+        const socket = io();
+
+        socket.on('hint', (e) => {
+            console.log(e);
+        })
+
+        socket.on('broadcast', (e) => {
+            console.log(e);
+        })
+
+        socket.on('permissionData',(e) => {
+            console.log(e);
+        })
+
+
+        btn.addEventListener('click', () => {
+            const iptVal = ipt.value
+            sendMsg(iptVal)
+        })
+
+        getDataBtn.addEventListener('click', () => {
+            getData()
+        })
+
+
+        const sendMsg = (iptVal) => {
+            // 发送事件
+            socket.emit('message', { ...userInfo, data: iptVal });
+        }
+
+        const getData = () => {
+            // 获取服务端端数据
+            socket.emit('getData', userInfo);
+        }
+    </script>
+</body>
+
+</html>

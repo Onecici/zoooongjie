@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <script>
+        // instanceof只能用来判断两边原型对象是否相等
+        // 不能判断Object  因为任何的原型对象都是Object
+        function MyFun() {
+            this.name = "MyFun";
+        }
+        let m = new MyFun();
+        console.log(m instanceof MyFun);  // instanceof执行的时候左边的判断值会去原型链中查找是否存在右边的原型对象    
+        // 如果右边判断值是Object的时候也会为true 因为原型对象顶级是Object所以instanceof不能判断Object
+    </script>
+</body>
+
+</html>

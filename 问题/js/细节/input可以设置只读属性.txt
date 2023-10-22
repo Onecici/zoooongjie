@@ -1,0 +1,1 @@
+readonly="readonly"  适用于选择日期时间插件

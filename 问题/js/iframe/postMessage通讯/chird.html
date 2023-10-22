@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">向外发送数据</button>
+    <script>
+        const btn = document.querySelector('#btn')
+        // 接收postMessage传来的数据
+        window.addEventListener('message', (e) => {
+            console.log(e.data);
+        })
+
+        btn.addEventListener('click', () => {
+            // 向iframe外部发送数据
+            window.parent.postMessage('我是iframe中传来的数据', '*')
+        })
+    </script>
+</body>
+
+</html>

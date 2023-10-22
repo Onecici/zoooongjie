@@ -1,0 +1,43 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/Home/index",
+			"style": {
+				"navigationBarTitleText": "页面传参练习"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "聊天窗口"
+			}
+		}
+	    ,{
+            "path" : "pages/Test/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "页面传参练习"
+            }
+            
+        }
+    ],
+	"tabBar": {
+		"backgroundColor": "#888",
+		"list": [{
+				"pagePath": "pages/Home/index",
+				"text": "页面传参练习"
+			},
+			{
+				"pagePath": "pages/index/index",
+				"text": "聊天窗口"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

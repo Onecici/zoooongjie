@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Father(name, age) {
+            this.name = name
+            this.age = age
+        }
+        Father.prototype.say = () => {
+            console.log("我是Father原型对象中的say方法");
+        }
+        // 比如上面是别人定义好的构造函数
+        // 下面就是我创建的构造函数 我想使用别人定义好的构造函数中的方法
+
+        function Son(name, age, num) {
+            Father.call(this, name, age) // 这里相当于普通函数的调用方式 改变了函数内部的this指向从而指向Son构造函数为Son构造函数实例上添加方法
+            this.num = num
+        }
+        
+        Son.prototype.__proto__ = Father.prototype
+        let s = new Son("云哈哈", 18, 587)
+        s.say()
+        // Son构造函数改变this指向利用Father构造函数中的方法给自己添加对象
+        // Son构造函数prototype.__proto__继承了Father构造函数的原型对象 
+        // 利用原型对象的继承特性new Son使用方法之后会先寻找当前构造函数中的原型对象有没有这个方法 没有就会向上一层__proto__原型对象去寻找
+    </script>
+</body>
+
+</html>

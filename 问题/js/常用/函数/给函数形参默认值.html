@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        // options形参如果有值的话 输出的就是传入的参数
+        // 如果没有传入参数的话 输出的就是空对象
+        const myFun = (options = {}) => {
+            console.log(options);
+        }
+
+        myFun()
+    </script>
+</body>
+
+</html>

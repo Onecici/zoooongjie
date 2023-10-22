@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .box {
+        width: 100px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 50px;   /* 让li元素高度由内容撑开 */
+    }
+
+    .box li {
+        background-color: grey;
+    }
+
+    .details { /* 利用高度为0 超出部分隐藏的特性 相当于display none效果但它不能做动画   利用特性这样可以做动画 */
+        overflow: hidden;
+        height: 0;
+        transition: all 1s;
+    }
+
+    .details li {
+        height: 20px;
+        background-color: olive;
+        line-height: 20px;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <ul class="boxDetailsList">
+            <li>A</li>
+            <li>
+                <div>B</div>
+                <ul class="details">
+                    <li>a</li>
+                    <li>b</li>
+                    <li>b</li>
+                    <li>b</li>
+                    <li>b</li>
+                    <li>b</li>
+                </ul>
+            </li>
+            <li>C</li>
+        </ul>
+    </div>
+    <script>
+        let lis = document.querySelectorAll(".boxDetailsList>li")
+        lis[1].addEventListener("click", function () {
+            this.children[1].offsetHeight <= 0 ? this.children[1].style.height = this.children[1].children[0].offsetHeight * this.children[1].children.length + "px" : this.children[1].style.height = "0px"
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./myFn.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 50px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">动画</div>
+    <script>
+        // Map方法它可以用来存储键值对
+        const a = new Map()
+
+        const fn = () => {
+            console.log(123);
+        }
+        const obj2 = { name: 'Lisa' }
+
+        // Map可以支持任何数据类型的键(对象、数组、函数...)
+        a.set(fn, 'is Fn key')
+        a.set('Obj2', obj2)
+        console.log(a.get(fn));
+
+        // Map和Object都可以存储键值对 区别是
+        const obj = { 4: 11, 3: 11, 2: 10 }
+        console.log(Object.keys(obj)); // 无序的结构 就是不能按照obj对象插入的数据结构顺序显示出来
+
+
+        // map可以以任意方式都能输出有序结构(按照插入的数据结构顺序显示出来)
+        a.forEach((val, key) => {
+            console.log('value', val);
+            console.log('key', key);
+        })
+
+        // Map比Object操作对象数据性能快
+    </script>
+</body>
+
+</html>

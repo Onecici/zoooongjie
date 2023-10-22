@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 顶级构造函数
+        Function.prototype.afsa = 1225
+
+        function A() {
+            this.name = "埃及吉萨"
+        }
+        // 使用new出来的实例化构造函数的时候只有一种路线prototype向上查找原型对象是否有我调用的方法 顶级原型对象是Object.prototype
+        let a = new A()
+        
+        // 构造函数本身是有两种路线prototype和__proto__ 如果用构造函数调用某个属性或方法时会从这两个路线去查找是否有
+        console.log(A.afsa);
+        
+        // 构造函数的__proto__是顶级构造函数原型对象Function.prototype
+        console.log(A.__proto__ === Function.prototype);
+
+    </script>
+</body>
+
+</html>

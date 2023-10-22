@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./myFn.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 一个变量对象上可以有2种对象数据属性可使用 1.函数自身也是对象可以挂载属性  2.调用时返回的new实例对象上也可以挂载属性
+        const f = (() => {
+            const _ = function () {
+                // 当使用new创建构造函数时 函数体 会执行一次,需要加判断条件来对返回值的new做限制,否则new构造函数会一直循环调用下去(死循环)
+                if (!(this instanceof _)) {
+                    return new _()
+                }
+                console.log(this); // 因为调用new _()创建构造函数该函数还会执行一次 此次执行时函数体内的this指向是构造函数实例
+            }
+            _.prototype.run = () => {
+                console.log('已创建实例--执行');
+            }
+
+            _.run = () => {
+                console.log('未创建实例--执行');
+            }
+
+            return _
+        })()
+
+        f.run() // 这里使用的是 f 函数对象上的属性方法
+        f().run() // 只有在new出来实例时才能使用prototype上挂载的属性方法
+        
+        // 思考：函数返回new实例对象和返回一个对象有什么区别  返回new实例对象更容易操作实例中的数据  而返回一个对象操作数据比较麻烦
+    </script>
+</body>
+
+</html>

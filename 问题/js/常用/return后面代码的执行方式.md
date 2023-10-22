@@ -1,0 +1,3 @@
+Return后面代码是异步的话会等待执行完毕后再return
+
+Return后面代码是可执行函数会执行后再return

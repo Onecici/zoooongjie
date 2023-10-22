@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>ABC</button>
+    <button>ABC123</button>
+    <script>
+        // var循环
+        let btns = document.querySelectorAll('button')
+        for (let i = 0; i < btns.length; ++i) {
+            // let 是局部作用域  每次循环都是不同的块级作用域 每次循环都定义新的变量块 不会影响上一轮循环的块
+            console.log(i);
+            btns[i].onclick = function() {
+                console.log(i);
+            }
+            // 每点击一次相当于点击了对应的块 每个块下的变量i都是不同的
+        }
+    </script>
+</body>
+</html>

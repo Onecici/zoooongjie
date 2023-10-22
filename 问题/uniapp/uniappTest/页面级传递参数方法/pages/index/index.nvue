@@ -1,0 +1,251 @@
+<template>
+	<view class="content">
+		<z-paging ref="paging" @scroll="scrollEVENT" :lower-threshold="380" :nvue-bounce="false" use-chat-record-mode
+			v-model="dataList" @cellStyleChange="cellStyleChange" @query="queryList">
+
+			<cell class="item" v-for="(item,index) in dataList" :style="cellStyle" :key="item.name"
+				:ref="`z-paging-${index}`">
+				<chatItem :item="item" ref="chatItem"></chatItem>
+			</cell>
+
+			<template #bottom>
+				<view class="sendBoxWrap" :style="sendBoxStyle">
+					<view class="sendBox">
+						<textarea class="messgeBox"></textarea>
+					</view>
+					<view class="sendBtn">
+						<text style="font-size: 40rpx;color: #ffc;">发送</text>
+					</view>
+
+				</view>
+			</template>
+
+		</z-paging>
+		<view class="scrollBoxWrap" :style="{height:visibleHeight + 'px'}">
+			<view class="scrollBox" :style="scrollBoxStyle">
+
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+	import chatItem from "@/compoents/chat-item/chat-item.vue"
+	import {
+		recentlyItem
+	} from "./index.js"
+	const dom = weex.requireModule('dom')
+	export default {
+		components: {
+			chatItem
+		},
+		data() {
+			return {
+				dataList: [],
+				cellStyle: {},
+				pageSumHeight: 0,
+				visibleHeight: 0,
+				isDragging: false,
+				contentY: 0,
+				scrollBoxOpacity: 0,
+				sendBoxStyle: {
+					height: '60px'
+				},
+				loadDataStatus: false, // 数据是否加载完毕(主要用于解决下拉时数据加载完毕后就会执行一次滚动事件，但这个事件我需要屏蔽，因为对我所做的业务造成影响)
+				isDataCompleteLoading: false, // 分页数据是否加载完毕
+			}
+		},
+		onReady() {
+			uni.getSystemInfo({
+				success: (res) => {
+					this.visibleHeight = res.windowHeight - parseInt(this.sendBoxStyle.height)
+					console.log(this.visibleHeight); // 页面总高度
+				}
+			});
+		},
+		computed: {
+			scrollBoxStyle() {
+				return {
+					height: this.visibleHeight * (this.visibleHeight / this.pageSumHeight) + 'px',
+					bottom: this.visibleHeight * (this.contentY / this.pageSumHeight) + 'px',
+					opacity: this.scrollBoxOpacity
+				}
+			},
+		},
+		methods: {
+			// 处于滚动状态
+			scrollEVENT(e) {
+				const {
+					contentSize: {
+						height
+					},
+					contentOffset: {
+						y
+					},
+				} = e
+				/*
+					处于数据加载中时不监听滚动,加载完成数据时才能监听滚动
+					因为数据加载完成时updataScorllBoxData函数会触发滚动效果来改变滚动条的样式
+					滚动条样式只允许通过updataScorllBoxData函数进行改变
+				*/
+				const pageSumHeight = this.pageSumHeight
+				const c = height - pageSumHeight
+				if (c < 300 && c !== 0 && !this.isDataCompleteLoading) return
+				this.isDragging = true
+				this.scrollBoxOpacity = 1
+				this.contentY = Math.abs(y)
+				if (pageSumHeight !== height) this.pageSumHeight = height
+			},
+			cellStyleChange(cellStyle) {
+				this.cellStyle = cellStyle
+			},
+			updataScorllBoxData() {
+				this.$nextTick(async () => {
+					if (this.isDragging) {
+						console.log('不滚动');
+					} else {
+						// 滚动到最近的chatItem元素附近
+						const chatItem = this.$refs.chatItem
+						const {
+							scrollChatItem,
+							chatItemIndex
+						} = await recentlyItem(chatItem)
+						if (chatItemIndex !== 0) {
+							dom.scrollToElement(scrollChatItem, {
+								offset: -10,
+							})
+						}
+					}
+				})
+			},
+			queryList(page, pageSize) {
+				setTimeout(async () => {
+					this.isDragging = false
+					this.loadDataStatus = true
+					await this.$refs.paging.complete([{
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄1',
+						content: '消息1',
+						isMe: false
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄2',
+						content: '消息2',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄3',
+						content: '消息3',
+						isMe: false
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}, {
+						time: '',
+						icon: '/static/logo.png',
+						name: '大雄4',
+						content: '消息4',
+						isMe: true
+					}]);
+					this.loadDataStatus = false
+					this.updataScorllBoxData()
+				}, 1000)
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.content {
+		flex: 1;
+
+		.scrollBoxWrap {
+			position: relative;
+
+			.scrollBox {
+				position: absolute;
+				opacity: 0;
+				bottom: 0;
+				right: 0;
+				width: 10rpx;
+				background-color: #ccc;
+				border-radius: 10rpx 10rpx;
+			}
+		}
+
+		.sendBoxWrap {
+			flex-direction: row;
+			background-color: blanchedalmond;
+
+			.sendBox {
+				flex: 1;
+				flex-direction: row;
+				padding: 10rpx;
+
+				.messgeBox {
+					flex: 1;
+					background-color: #fff;
+					border: 2rpx solid #ccc;
+					border-radius: 10rpx;
+					font-size: 60rpx;
+				}
+			}
+
+			.sendBtn {
+				justify-content: center;
+				align-items: center;
+				margin: 10rpx;
+				width: 160rpx;
+				border-radius: 30rpx;
+				background-color: rgb(0, 123, 254);
+			}
+		}
+	}
+</style>

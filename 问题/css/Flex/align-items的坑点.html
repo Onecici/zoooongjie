@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            display: flex;
+            /* 默认的align-items 属性的值是 stretch 会将所有没有固定高度的子元素拉伸至父元素同等高度*/
+            /* 如果想让子元素的高度由 内容 撑开必须设置其任意一个属性值即可*/
+            align-items: flex-start;
+            width: 300px;
+            height: 100px;
+            background-color: #ccc;
+        }
+
+        .msgContent {
+            display: flex;
+            flex-direction: row-reverse;
+            width: 100%;
+            padding: 8px;
+            background-color: red;
+        }
+
+        .userImg {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+        }
+
+        .msgText {
+            max-width: 100px;
+            margin-right: 15px;
+            background-color: #666;
+            word-break: break-all
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="msgContent">
+            <div class="userImg"></div>
+            <div class="msgText">
+                ajfkajfjafkakkajsjskajfkajfjajfkajajfkajfjafkakkajsjskajfkajfjajfkajfjafkakkajsjskafkakkajsjskajfkajfjafkakkajsjskajfkajfjafkakkajsjskfjafkakkajsjskafkakkajsjskajfkajfjafkakkajsjskajfkajfjafkakkajsjsk
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4]
+        function foo(a, b, c, d) {
+            console.log(a, b, c, d);
+        }
+        
+        foo.apply(null, arr) // apply会将一个数组拆分为单个参数 一个参数接一个参数的传递给方法
+        console.log(...arr); // 和这个ES6语法拆分一样
+    </script>
+</body>
+
+</html>

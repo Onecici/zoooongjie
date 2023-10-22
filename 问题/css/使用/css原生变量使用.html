@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* css变量写法 */
+        .b {
+            --theme-background: black;
+            --theme-color: #f4f4f4;
+        }
+
+        .r {
+            --theme-background: red;
+            --theme-color: #888;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .box {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            color: var(--theme-color);
+            background-color: var(--theme-background);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        哈哈哈
+    </div>
+    <button id="b">点击切换黑色</button>
+    <button id="r">点击切换红色</button>
+    <script>
+        let body = document.body
+        let b = document.querySelector('#b')
+        let r = document.querySelector('#r')
+        b.addEventListener('click', () => {
+            body.className = 'b' // 父级上设置定义好的类变量 然后所有子元素通过var()就能获取到对应的变量
+        })
+        r.addEventListener('click', () => {
+            body.className = 'r'
+        })
+    </script>
+</body>
+
+</html>

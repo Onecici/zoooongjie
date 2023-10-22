@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script> 
+        // 函数声名时也会提升到整个代码的第一行 函数声名的优先级最高
+        // 函数一旦声名完毕就没有后续操作了所以可以直接在任意地方调用函数
+        console.log(a);   // 因为函数声明优先级最高 所以打印得到的是函数体  但此时var变量只是声明了还没做赋值操作
+        var a = 5   // var声名变量是可以重复声名的 但赋值操作在原地
+        function a() {
+            console.log(1);
+        }
+        console.log(a);
+
+        // 执行顺序
+        // 函数优先声名 var在后，但此时var变量只是声明了没赋值
+        // 函数声名完毕后就没有后续的操作了 var只是声名了变量但没有赋值 所以声名完毕了之后又去做赋值操作此时a就被覆盖了
+    </script>
+</body>
+
+</html>

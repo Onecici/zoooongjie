@@ -1,0 +1,68 @@
+<template>
+	<view class="videoWrap">
+		<!-- object-fit: fill可以使视频中的内容铺满 -->
+		<video style="object-fit: fill;" id="m_video" ref="m_video" :src="vSrc" :controls="false" :autoplay="isPlay" @play="playingStatus('play')"
+			@pause="playingStatus('pause')">
+
+		</video>
+		<videoControl @doublePause="doublePause" />
+
+	</view>
+</template>
+
+<script>
+	import videoControl from './compoents/video_control.vue'
+
+	let videoCTX;
+	let systemInfo;
+	export default {
+		components: {
+			videoControl
+		},
+		data() {
+			return {
+				vSrc: 'https://video.pearvideo.com/mp4/third/20220808/cont-1769047-11643363-105624-hd.mp4',
+				isPlay: true
+			}
+		},
+		onLoad() {
+			// 因为subNvue中没有onShow和onHide方法所以只能使用自定义事件来实现切换页面时的暂停和播放状态
+			uni.$on('show',() => {
+				videoCTX.play()
+			})
+			uni.$on('hide',() => {
+				videoCTX.pause()
+			})
+			systemInfo = uni.getSystemInfoSync()
+		},
+		onReady() {
+			videoCTX = this.$refs.m_video
+		},
+		methods: {
+			// 双击事件
+			doublePause() {
+				if (this.isPlay) {
+					videoCTX.pause()
+				} else {
+					videoCTX.play()
+				}
+			},
+			playingStatus(type) {
+				switch (type) {
+					case 'play':
+						this.isPlay = true
+						break;
+					case 'pause':
+						this.isPlay = false
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+
+</style>

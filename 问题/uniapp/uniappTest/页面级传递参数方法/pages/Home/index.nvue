@@ -1,0 +1,48 @@
+<template>
+	<view>
+		<text>主页</text>
+		<button @click="jumpT">点击跳转到Test页面</button>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+
+			}
+		},
+		onLoad() {
+			// 页面传参方式1-1
+			uni.$on('add', res => {
+				console.log(res);
+			})
+		},
+		methods: {
+			jumpT() {
+				uni.navigateTo({
+					url: '/pages/Test/index',
+					// 页面传参方式2-1
+					events: { // 这里监听的是跳转页面中通过eventChannel.emit调用时传来的自定义事件
+						backData(data) {
+							console.log(data)
+						},
+					},
+					success(res) {
+						// 页面传参方式2-2  向下级页面抛出事件
+						res.eventChannel.emit('gData', {
+							data: 'gData'
+						})
+					}
+				})
+			}
+		},
+		onUnload() {
+			// 页面传参方式1-2 记得解绑 不然会导致多次绑定事件的bug
+			uni.$off('add')
+		}
+	}
+</script>
+
+<style>
+</style>

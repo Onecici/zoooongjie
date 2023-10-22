@@ -1,0 +1,1 @@
+由于 innerText 受 CSS 样式的影响，它会触发重排（reflow），但 textContent 不会。

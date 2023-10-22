@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <script>
+
+    </script>
+</body>
+<script>
+    // 递归拷贝 是要每一层都要实现深拷贝 比较复杂
+    function copyObj(copyData) {
+        let newCopyData
+        const toStr = Object.prototype.toString
+        switch (toStr.call(copyData)) {
+            case '[object Array]':
+                newCopyData = []
+                break;
+            case '[object Object]':
+                newCopyData = {}
+                break;
+            default:
+                throw new Error('该数据不是复杂数据类型,不需要深拷贝')
+                break;
+        }
+        for (let key in copyData) {
+            if (typeof copyData[key] === "object") {
+                newCopyData[key] = copyObj(copyData[key])
+            } else {
+                newCopyData[key] = copyData[key]
+            }
+        }
+        return newCopyData
+    }
+
+    let obj = {
+        name: "哈哈哈",
+        age: 18,
+        arr: {
+            kkk: 888,
+            narr: [1, 8, 6]
+        }
+    }
+
+    // 实现深拷贝方法
+    let obj1 = { ...obj }
+    let obj2 = JSON.parse(JSON.stringify(obj))
+    let obj3 = copyObj(obj)
+
+    let num = 3
+    let num1 = num
+    num = 5
+    console.log(num1); // 3   
+
+    // 深浅拷贝只是针对复杂数据类型进行拷贝的   基础数据类型只是将栈中的地址复制了 相当于直接赋值
+
+    // 浅拷贝
+    // 当我把一个变量内的对象赋值给一个新的变量的时候在内存堆中对象的内存地址会指向这个变量
+    // 当对象数据发生改变的时候这两个变量获取到的是改变后的结果
+
+    // 深拷贝
+    // 把一个对象上的属性复制到一个新的对象上，这时其中一个对象修改了数据不会影响另一个对象数据
+
+</script>
+
+</html>

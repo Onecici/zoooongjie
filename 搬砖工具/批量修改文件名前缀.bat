@@ -1,0 +1,1 @@
+for %%i in (*.*) do ren "%%i" body_1036_"%%i"
