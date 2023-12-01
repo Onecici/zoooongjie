@@ -23,8 +23,8 @@ app.use(i18n)
 
 ```vue
 <template>
-	<div>{{ $t("hello") }}</div>
-	<i18n path="hello" tag="div">  // path是语言包的对象路径
+	<div>{{ $t("en.hello") }}</div>
+	<i18n path="en.hello" tag="div">  // path是语言包的对象路径
     	<span class="hightlight">0</span>  // 这里面内容分别显示在语言包数据中的插槽中{0}{1}
     	<span class="hightlight">1</span>
 	</i18n>

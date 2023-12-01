@@ -5,7 +5,7 @@ toast.install = Vue => {
     // 扩展 vue 插件
     const ToastCon = Vue.extend(message)
     const ins = new ToastCon()
-    // 挂载 dom
+    // 将组件挂载到新创建的div元素上
     ins.$mount(document.createElement('div'))
     // 给 vue 原型添加 toast 方法
     Vue.prototype.$message = (msg) => {

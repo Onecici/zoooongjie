@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./mqtt.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      width: 40px;
+      height: 40px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+
+    const url = 'ws://broker.emqx.io:8083/mqtt'
+
+    // 配置
+    const options = {
+      clean: true,
+      connectTimeout: 4000, // 连接超时重连
+      // 认证信息
+      clientId: 'emqx_test',
+      username: 'emqx_test',
+      password: 'emqx_test',
+    }
+    const client = mqtt.connect(url, options)
+    client.on('connect', function () {
+      console.log('Connected')
+      // 订阅频道
+      client.subscribe('test', function (err) {
+        if (err) {
+          console.log('发生错误');
+        }
+      })
+    })
+
+    // 接收消息
+    // topic 订阅的频道
+    client.on('message', function (topic, message) {
+      console.log(message.toString())
+      client.end()
+    })
+
+  </script>
+</body>
+
+</html>
