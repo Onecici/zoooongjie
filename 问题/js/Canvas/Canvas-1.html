@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      padding: 52px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myCanvas"></canvas>
+  <script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = 300
+    canvas.height = 300
+
+    ctx.beginPath() // 开始绘制
+    ctx.moveTo(0, 0) // 设置路径起始点 (x, y)
+
+    // // lineTo线的移动
+    ctx.lineTo(canvas.width, 0) // 1.当前只有 x坐标 发生了变化                  所以当前只移动 x轴 的线
+    ctx.lineTo(canvas.width, canvas.height) // 2.当前只有 y坐标 发生了变化      所以当前只移动 y轴 的线
+    ctx.lineTo(0, canvas.height) // 3.当前只有 x坐标 发生了变化                 所以当前只移动 x轴 的线
+    ctx.closePath() // 关闭路径 会自动将让路径起始点和末尾点进行拼接
+    ctx.lineWidth = 1 // 线的宽度 1px
+    ctx.strokeStyle = 'red' // 线颜色
+    ctx.stroke() // 结束绘制
+
+  </script>
+</body>
+
+</html>
