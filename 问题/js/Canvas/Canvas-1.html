@@ -11,6 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       padding: 52px;
     }
@@ -38,6 +39,9 @@
     ctx.strokeStyle = 'red' // 线颜色
     ctx.stroke() // 结束绘制
 
+    // 补充
+    // ctx.clearRect(0, 0, width, height) // (x,y,要切掉的宽度,要切掉的高度) 该方法可以将canvas某个区域进行切除
+    // ctx.drawImage(img, 0, 0) // (new Image实例,x,y) 该方法可以在canvas中对应坐标下插入图片
   </script>
 </body>
 

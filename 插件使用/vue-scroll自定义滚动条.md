@@ -13,7 +13,7 @@ Vue.use(vuescroll);
 
 使用
 
-![image-20231205192603554](C:\Users\admin\Desktop\zongjie\插件使用\assets\image-20231205192603554.png)
+![image-20231205192603554](.\assets\image-20231205192603554.png)
 
 ```js
 // 简单配置

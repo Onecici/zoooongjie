@@ -1,0 +1,1 @@
+this.$refs可以获取当前template中所有绑定ref属性的一个集合
