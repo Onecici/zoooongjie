@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Anime.js Example</title>
+  <style>
+    @keyframes scaleDraw {
+      0% {
+        transform: scale(1);
+      }
+
+      10% {
+        transform: scale(1.4);
+      }
+
+      30% {
+        transform: scale(1.2);
+      }
+
+      50% {
+        transform: scale(1.4);
+      }
+
+      70% {
+        transform: scale(1.2);
+      }
+
+      80% {
+        transform: scale(1.4);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .scale-draw {
+      animation: scaleDraw 3s linear 0s;
+    }
+
+    .b {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      background-color: black;
+    }
+
+    .svgs {
+      width: 100%;
+      height: 100%;
+    }
+
+    .svgs text {
+      font-size: 3.2vw;
+      fill: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="b">
+    <!-- viewBox属性相当于头像功能的裁剪 -->
+    <!-- viewBox="裁剪起始点x 裁剪起始点y 裁剪宽度 裁剪高度" -->
+    <svg class="svgs" viewBox="0 0 200 80">
+      <defs>
+        <!-- linearGradient配置渐变色 使用方法在带有fill的标签属性添加url(#id名) -->
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:0.3" />
+        </linearGradient>
+      </defs>
+      <g class="bar">
+        <!-- 因为text的x和y都为0时会导致text标签移出svg外边 所以需要设置viewBox或text标签上y坐标 -->
+        <text x="0" y="-10">555555</text>
+        <image class="imgs" x="10" y="40"
+          xlink:href="data:image/png;base64,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"
+          height="30"></image>
+        <g>
+          <!-- rect标签用来绘制矩形 x和y表示放置的坐标-->
+          <rect x="0" y="0" width="100" height="10" fill="url(#grad1)"></rect>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <button id="btn">SVG图片变化</button>
+  <script>
+    const imgs = document.querySelector('.imgs')
+
+    btn.onclick = () => {
+      bounce(imgs)
+    }
+
+    // 添加动画
+    function bounce(dom) {
+      dom.classList.add('scale-draw')
+      setTimeout(() => {
+        dom.classList.remove('scale-draw')
+      }, 8000)
+    }
+  </script>
+</body>
+
+</html>
