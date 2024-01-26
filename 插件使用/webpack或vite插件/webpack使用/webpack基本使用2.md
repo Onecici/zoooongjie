@@ -305,14 +305,17 @@ module.exports = (env, args) => {
 				dry: false,
 			}),
 
+      // MiniCssExtractPlugin打包时用来提取js文件中引入的css文件到单独的css文件
 			new MiniCssExtractPlugin({
 				filename: isDevMode ? "[name].css" : `static/css/[id].${version}.css`,
 				chunkFilename: isDevMode ? "[name].css" : `static/css/[id].${version}.css`,
 			}),
 
-            // 创建全局变量可以在任意js文件中使用
+            // DefinePlugin创建全局变量可以在任意js文件中使用
 			new webpack.DefinePlugin(defineObj),
 
+      
+      // CopyWebpackPlugin在我们使用Webpack的时候，有一些本地资源，例如图片和音视频，在打包过程中没有任何模块使用到它们，但我们却想要把它们放在打包后的某个目录下
 			new CopyWebpackPlugin({
                 patterns: [
                     {
@@ -337,6 +340,7 @@ module.exports = (env, args) => {
             }),
 
 			new compressionWebpackPlugin({
+        // 这里filename格式固定不用变
 				filename: '[path].gz[query]', 
 				algorithm: 'gzip', 
 				test: /\.(js|css|svg)$/,
@@ -373,6 +377,8 @@ module.exports = (env, args) => {
 					},
 				}),
 				new OptimizeCSSAssetsPlugin({}),
+        
+        // 生成可视化查看打包后的体积大小
 				new BundleAnalyzerPlugin({
 					analyzerMode:
 					process.env.npm_config_report == "true" ? "server" : "disabled",
