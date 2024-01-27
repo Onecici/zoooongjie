@@ -59,3 +59,4 @@ const buffer = xlsx.build([{ name: 'sheet1', data: result }]);
 fs.writeFileSync(`汇总.xlsx`, buffer, { 'flag': 'w' });
 
 // 运行 node shell.js 即可
+// 输出格式为 用户名	提交次数	总行数	添加行数	删除行数
