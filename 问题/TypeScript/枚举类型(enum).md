@@ -31,3 +31,16 @@ const enum constDirection {
 // 常量枚举只能包含常量值（即直接量 如string,number这些,而普通枚举可以包含任何类型的值 !!!
 ```
 
+#### 使用场景
+
+```ts
+enum Days {
+  Sun, Mon, Tue, Wed, Thu, Fri, Sat
+};
+
+console.log(Days["Sun"] === 0); // true
+console.log(Days["Mon"] === 1); // true
+console.log(Days["Tue"] === 2); // true
+console.log(Days["Sat"] === 6); // true
+```
+
