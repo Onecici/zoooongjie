@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p><input type="text"></p>
+    <script>
+        const worker = new Worker('./wroke.js')
+
+        // 发送消息给Worker.js中的onmessage
+        worker.postMessage(100)
+
+        // 监听Worker传来的消息
+        worker.addEventListener('message', (e) => {
+            // 关闭worker(如不需要继续进行计算可关闭worker)
+            worker.terminate();
+            console.log(e.data);
+        })
+    </script>
+</body>
+
+</html>

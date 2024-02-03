@@ -30,6 +30,8 @@ npm i babel-loader @babel/core @babel/preset-env -D
                     ]
                 },
                 "useBuiltIns": "usage",
+              
+              	// babel-polyfill
                 "corejs": 3 // 需要npm install core-js
             }
         ]
