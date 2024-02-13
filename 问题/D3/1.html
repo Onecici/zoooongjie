@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+</head>
+
+<body>
+    <svg></svg>
+    <script>
+        // 数据集
+        var dataset = [88, 75, 50]
+
+        // 1. 选择svg元素
+        var svg = d3.select('svg')
+        // 2. 在svg元素中添加一个g元素并给当前g元素添加自定义属性
+        var g = svg.append('g').attr('transform', 'translate(75, 75)')
+
+        // 3. 创建 饼图数据集分配 函数
+        var pie = d3.pie().value(v => { return v })
+
+        // 4. 创建数组迭代方法(配合selectAll使用)
+        var colors = d3.scaleOrdinal(['#69C', '#FC9', '#9C6'])
+
+        // 选择所有path元素并使用.data给每个元素绑定数据集中对应下标的数据
+        // 2.1 .enter方法用来检测当前是否缺少元素
+        g.selectAll('path').data(pie(dataset)).enter()
+
+            // 2.2 如果缺少元素就会链式执行下面代码并自动对该元素绑定数据集中对应的数据
+            .append('path')
+            .attr('d', d3.arc().innerRadius(0).outerRadius(70))
+            .attr('stroke', 'white')
+            .attr('stroke-width', 2)
+            .attr('opacity', 0.8)
+            .attr('fill', colors)
+            .on('mouseover', handleMouseOver) // 绑定鼠标移入事件处理方法
+            .on('mousemove', handleMouseMove) // 绑定鼠标移动事件处理方法
+            .on('mouseout', handleMouseOut) // 绑定鼠标移出事件处理方法
+
+
+        // 3.1 绘制图例
+        var legend = svg.append('g').attr('transform', 'translate(200, 50)')
+
+        // 3.2 绘制图例圆点图标
+        legend.selectAll('circle').data(dataset).enter()
+            .append('circle')
+            .attr('r', 7)
+            .attr('cy', (v, i) => { return i * 20 + 5 }) // 设置y坐标(相对于父元素)
+            .attr('fill', colors)
+
+        // 3.3 绘制图例文字数值
+        legend.selectAll('text').data(dataset).enter()
+            .append('text')
+            .text((v, i) => { return v })
+            .attr('x', 15)
+            .attr('y', (v, i) => { return i * 20 + 10 })
+            .attr('font-size', '0.8em')
+            .attr('text-auchor', 'middle')
+
+
+
+        // 鼠标移入饼图区域
+        function handleMouseOver(e, v) {
+            d3.select(this).attr('opacity', 1)
+
+            var pos = d3.pointer(e) // 用于获取鼠标事件的坐标
+            var x = pos[0] + 95
+            var y = pos[1] + 75
+            var tooltip = svg.append('g').attr('class', 'tooltip').attr('transform', 'translate(' + x + ',' + y + ')')
+            var text = tooltip.append('text').text(v.value).attr('text-anchor', 'middle')
+
+            // 获取元素坐标宽度信息
+            var box = text.node().getBBox()
+
+            // 在g元素里的text元素前面插入rect元素并设置rect属性
+            // 这里如果不插入到text元素前面会导致text元素层级被rect覆盖   所以svg层级关系是以元素最前的才是最高层
+            tooltip.insert('rect', 'text')
+                .attr('x', box.x)
+                .attr('y', box.y)
+                .attr('width', box.width)
+                .attr('height', box.height)
+                .attr('fill', 'white')
+                .attr('opacity', 0.7)
+        }
+
+        // 鼠标在饼图区域移动
+        function handleMouseMove(e) {
+            var pos = d3.pointer(e)
+            var x = pos[0] + 95
+            var y = pos[1] + 75
+
+            d3.select('.tooltip')
+                .attr('transform', 'translate(' + x + ',' + y + ')')
+        }
+
+        // 鼠标移出饼图区域
+        function handleMouseOut() {
+            d3.select(this).attr('opacity', 0.8)
+            d3.select('.tooltip').remove()
+        }
+    </script>
+</body>
+
+</html>

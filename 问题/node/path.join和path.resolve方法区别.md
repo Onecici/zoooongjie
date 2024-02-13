@@ -15,4 +15,19 @@
 
 总结：path.join不会自动解析当前路径是否存在只会拼接  path.resolve相反会可以更具当前系统自动解析成符合当前系统的绝对路径
 
-![image-20231202120938584](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20231202120938584.png)
+
+
+#### 如
+
+```js
+const path = require('path')
+console.log(path.resolve(__dirname + './'));
+console.log(path.join(__dirname + './'));
+
+/* 
+	输出
+	/Users/oneci/Desktop/wl.
+	/Users/oneci/Desktop/wl./
+*/
+```
+
