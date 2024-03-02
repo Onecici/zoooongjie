@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            overflow: auto;
+            width: 100%;
+            background: #888;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .cc {
+            display: block;
+            height: 100%;
+        }
+
+        /* 隐藏全局滚动条 */
+        *::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrap">
+            <svg class="cc">
+
+            </svg>
+        </div>
+    </div>
+    <input class="myIpt" type="text">
+    <div>
+        <input class="a" type="radio" name="myCheckbox" value="1">1
+        <input class="a" type="radio" name="myCheckbox" value="2">2
+    </div>
+    <button class="btn">点击随机</button>
+    <script>
+        // 创建棋盘数据
+        class CreateData {
+            constructor({ row, col, data, restrictionsQZlength }) {
+                this.row = row;
+                this.col = col
+                this.data = data
+                this.restrictionsQZlength = restrictionsQZlength
+                this.init()
+            }
+
+            init() {
+                this.createRC()
+                this.setData(this.data)
+            }
+
+            // 绘制路图数据
+            createRC() {
+                const RC_data = {}
+                for (let i = 1; i <= this.col; i++) {
+                    RC_data[i] = {}
+                    for (let j = 1; j <= this.row; j++) {
+                        RC_data[i][j] = {}
+                    }
+                }
+                this.RC_data = RC_data
+            }
+
+            // 初始化数据
+            setData(data) {
+                const RC_data = this.RC_data
+
+                // data去重
+                data = data.reduce(function (acc, current) {
+                    var x = acc.find(item => item.index === current.index);
+                    if (!x) {
+                        return acc.concat([current]);
+                    } else {
+                        return acc;
+                    }
+                }, []);
+
+                data.forEach((item, index) => {
+                    this.editRcData('add', item)
+                })
+            }
+
+            // 添加数据
+            addData(data) {
+                const restrictionsQZlength = this.restrictionsQZlength
+                const [c, r] = this.getCR(data.index, data.index.length - 1)
+                if (c > restrictionsQZlength) {
+                    const t = c - restrictionsQZlength
+                    this.editRcData('reset', t)
+                }
+                this.editRcData('add', data)
+                console.log(this.RC_data);
+            }
+
+            getRcData() {
+                const newArrData = []
+                Object.values(this.RC_data).forEach((item) => {
+                    Object.values(item).forEach(item2 => {
+                        newArrData.push(item2)
+                    })
+                })
+                return newArrData
+            }
+
+
+            editRcData(type, item) {
+                if (type === 'add') {
+                    const [c, r] = this.getCR(item.index, item.index.length - 1)
+                    if (r <= this.row) {
+                        this.RC_data[c][r] = Object.assign(this.RC_data[c][r], item)
+                    } else {
+                        throw new Error('数据中col行数有误')
+                    }
+                } else if (type === 'reset') {
+                    // 清空数据
+                    for (const key in this.RC_data[item]) {
+                        this.RC_data[item][key] = {}
+                    }
+
+                    const obj = {}
+
+                    // 转换数组
+                    const R_arr = Object.values(this.RC_data)
+                    R_arr.push(...R_arr.splice(0, 1))
+
+                    // 转换对象
+                    R_arr.forEach((val, index) => {
+                        obj[index] = val;
+                    });
+
+                    this.RC_data = {...obj}
+                }
+            }
+
+            getCR(str, length) {
+                var result = [];
+                for (var i = 0; i < str.length; i += length) {
+                    result.push(str.substring(i, i + length));
+                }
+                return result;
+            }
+        }
+
+        // 绘制棋盘
+        class DrawQP extends CreateData {
+            constructor({ qp_options, qz_options, dataset }) {
+                super(dataset)
+                this._data = {}
+                this.$qp_options = qp_options
+                this.$qz_options = qz_options
+                this.DrawInit()
+            }
+            // 当传入的数据中col大于当前设置的col时就将传入的col进行比例化适应当前棋盘col 然后将棋盘col的数据长度前面部分进行移出 然后传入的col比例化后的行列位置要和棋盘col位置对应上
+            updated(data) {
+                const { cellMargin, height, row } = this.$qp_options
+                this.addData(data)
+                const update = this.cellBox.selectAll('g').data(this.getRcData())
+                update.select('.box')
+                    .transition()
+                    .duration(350)
+                    .attr('opacity', (v) => {
+                        if (v.type) {
+                            return 1
+                        } else {
+                            return 0
+                        }
+                    })
+                    .attr('fill', v => {
+                        if (v.type === 1) {
+                            return '#F94'
+                        } else {
+                            return 'red'
+                        }
+                    })
+            }
+
+            DrawInit() {
+                const { cellMargin, height, row } = this.$qp_options
+                const svg = d3.select('svg')
+                    .attr('height', height)
+
+                this.cellBox = svg.append('g').attr('class', 'block')
+
+                this.cell = this.cellBox.selectAll('g').data(this.getRcData())
+                this.enter = this.cell.enter().append('g')
+
+
+                this.createEvevyBox()
+                this.createQZ(this.cellBox, this.$qz_options)
+
+
+                d3.select('svg')
+                    .attr('width', d3.select('.block').node().getBBox().width)
+                    .attr('height', d3.select('.block').node().getBBox().height)
+
+            }
+
+            // 创建每个方块
+            createEvevyBox() {
+                const { cellMargin, height, row } = this.$qp_options
+
+                // 计算方块大小
+                this.cellSize = height / row - cellMargin
+                // 方块列计数器
+                let cellCol = 0
+
+                this.enter.append('rect')
+                    .attr('width', this.cellSize)
+                    .attr('height', this.cellSize)
+                    .attr('fill', 'rgb(20, 37, 52)')
+                    .attr('x', (v, i) => {
+                        if (i % row == 0) {
+                            cellCol++
+                        }
+
+                        var x = (cellCol - 1) * this.cellSize
+                        v.x = cellCol > 1 ? x + cellMargin * cellCol : x + cellMargin
+                        return v.x
+                    })
+                    .attr('y', (v, i) => {
+                        var y = i % row
+                        v.y = y > 0 ? y * this.cellSize + cellMargin * y : y * this.cellSize
+                        return v.y
+                    })
+            }
+
+            // 创建棋子
+            createQZ(cellBox, options) {
+                this.createQZ_Type1(cellBox, options)
+            }
+
+            // 棋子类型1
+            createQZ_Type1(cellBox, { rw, rh }) {
+                // 计算居中
+                const rCenterX = (this.cellSize - rw) / 2
+                const rCenterY = (this.cellSize - rh) / 2
+
+                this.enter.append('rect')
+                    .attr('class', 'box')
+                    .attr('width', rw)
+                    .attr('height', rh)
+                    .attr('x', (v) => {
+                        return Number(v.x) + rCenterX
+                    })
+                    .attr('y', (v) => {
+                        return Number(v.y) + rCenterY
+                    })
+                    .attr('rx', 30) // 设置圆角
+                    .attr('opacity', (v) => {
+                        if (v.type) {
+                            return 1
+                        } else {
+                            return 0
+                        }
+                    })
+                    .attr('fill', v => {
+                        if (v.type === 1) {
+                            return '#F94'
+                        } else {
+                            return 'red'
+                        }
+                    })
+            }
+        }
+
+
+        const data = [
+            {
+                type: 1,
+                index: '11',
+            },
+            {
+                type: 1,
+                index: '12'
+            },
+            {
+                type: 1,
+                index: '13'
+            },
+            {
+                type: 1,
+                index: '14'
+            },
+            {
+                type: 1,
+                index: '15'
+            },
+            {
+                type: 1,
+                index: '16'
+            },
+            {
+                type: 1,
+                index: '17'
+            },
+            {
+                type: 1,
+                index: '27'
+            },
+            {
+                type: 2,
+                index: '21'
+            },
+            {
+                type: 2,
+                index: '22'
+            },
+            {
+                type: 2,
+                index: '23'
+            },
+            {
+                type: 1,
+                index: '31'
+            },
+            {
+                type: 2,
+                index: '32'
+            }
+            ,
+            {
+                type: 1,
+                index: '41'
+            },
+            {
+                type: 2,
+                index: '51'
+            },
+            {
+                type: 1,
+                index: '61'
+            },
+            {
+                type: 2,
+                index: '71'
+            },
+            {
+                type: 1,
+                index: '81'
+            },
+            {
+                type: 2,
+                index: '91'
+            },
+            {
+                type: 1,
+                index: '101'
+            }
+        ]
+        const QP = new DrawQP({
+            qp_options: {
+                // 设置方块间距
+                cellMargin: 2,
+                // 设置图表参数
+                height: 200,
+                row: 7,
+            },
+            qz_options: {
+                rw: 20,
+                rh: 20
+            },
+            dataset: {
+                row: 7,
+                col: 100,
+                restrictionsQZlength: 10,
+                data
+            },
+        })
+
+
+        const ipt = document.querySelector('.myIpt')
+        document.querySelector('.btn').addEventListener('click', () => {
+            const radioA = document.querySelector('.a[name="myCheckbox"]:checked')
+            QP.updated({
+                type: Number(radioA.value),
+                index: String(ipt.value)
+            })
+        })
+    </script>
+</body>
+
+</html>

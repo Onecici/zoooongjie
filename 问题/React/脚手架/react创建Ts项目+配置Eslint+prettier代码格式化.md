@@ -1,6 +1,9 @@
 ```js
 // cmd创建TS项目模版
 create-react-app 项目名称 --template typescript
+
+// 运行不了的话
+npm i -g create-react-app
 ```
 
 ```js

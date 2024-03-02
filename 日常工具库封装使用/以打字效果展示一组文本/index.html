@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./index.css" />
+    <title>typingJS</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>typingJS<span class="word-waiting"></span></h1>
+        <p>
+            这是一个
+            <span class="typing-text">
+                <!-- 加逗号分隔可以展示多个词 -->
+                Awesome!,123456+
+            </span>
+            的项目
+        </p>
+        <br>
+        <p class="typing-1">以打字风格展示你的词组！</p>
+    </div>
+
+    <script src="./typing.js"></script>
+    <script>
+        new TypingJS({
+            cycleTimes: 1,
+        });
+    </script>
+</body>
+
+</html>

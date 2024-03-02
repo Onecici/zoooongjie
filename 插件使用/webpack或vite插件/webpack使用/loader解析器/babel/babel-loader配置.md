@@ -29,9 +29,9 @@ npm i babel-loader @babel/core @babel/preset-env -D
                         "last 2 versions"
                     ]
                 },
+              	// babel-loader只会将 ES6/7/8语法转换为ES5语法，但是对新api并不会转换
+              	// babel-polyfill可以将新api进行转换 以下方式进行配置即可
                 "useBuiltIns": "usage",
-              
-              	// babel-polyfill
                 "corejs": 3 // 需要npm install core-js
             }
         ]
