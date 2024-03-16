@@ -1,0 +1,1 @@
+vue2中v-model写在组件上时 组件的props接收到value属性 并且还创建了一个自定义事件为@input

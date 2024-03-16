@@ -1,5 +1,5 @@
 ```
-npm i swiper@4.5.1
+npm i swiper@5.2.0
 
  这个版本比较稳定
  
@@ -7,17 +7,14 @@ npm i swiper@4.5.1
 ```
 
 ```js
-main.js导入全局使用
+main.js导入全局使用 或者 再组件中引入也行
 
-import "swiper/dist/css/swiper.min.css";
-import "swiper/dist/js/swiper.min";
-
+import "swiper/css/swiper.css"
 ```
 
 ```js
 在组件中引入
 import Swiper from 'swiper'
-
 ```
 
 示例
