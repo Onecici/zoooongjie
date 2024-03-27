@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .test {
+            height: 100px;
+            overflow: auto;
+            border: 1px solid #559;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            /* 当内容不够撑满test元素时最小高度为100%这样就能让内容没撑满的情况下居中显示 */
+            min-height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test">
+        <!-- 解决方式就是将内容用div包起来 -->
+        <div class="box">
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+        </div>
+    </div>
+    <script>
+        const myArray = ['apple', 'banana', 'orange', 'grape', 'kiwi'];
+
+        const randomIndex = Math.floor(Math.random() * myArray.length);
+        const randomElement = myArray[randomIndex];
+
+        console.log('随机选择的下标是：', randomIndex);
+        console.log('随机选择的元素是：', randomElement);
+    </script>
+</body>
+
+</html>

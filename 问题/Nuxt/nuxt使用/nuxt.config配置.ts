@@ -54,7 +54,7 @@ export default defineNuxtConfig({
       }
     }
   },
-  // vite中引入全局scss变量和sass:math模块
+  // vite中引入全局scss变量和sass:math模块(用来执行数学计算的工具模块)
   vite: {
     // 编译配置
     plugins: isDev ? allPlugins : buildPlugins,
