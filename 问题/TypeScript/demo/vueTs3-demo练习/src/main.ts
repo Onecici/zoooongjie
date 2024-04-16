@@ -15,13 +15,11 @@ declare global {
     MyNamespace?: any
   }
 }
+window.MyNamespace = 123
 
-interface User<T> {
-  id: T
-  age: T
-}
+// --------------------------------------------------------------------------------------------------------------------
+
 type IFnCall<T> = <F>(callback: (num: T) => F, age: number) => F
-
 const foo: IFnCall<number> = function (callback, age) {
   return callback(age)
 }
@@ -30,71 +28,62 @@ foo<string>((age) => {
   return String(age + 12)
 }, 10)
 
-type PickUser<T> = Required<User<T>>
+// --------------------------------------------------------------------------------------------------------------------
+
+interface User<T> {
+  id: T
+  age: T
+}
+type PickUser<T> = Required<User<T>> // Required必填
 const ass: PickUser<number> = {
   id: 5,
   age: 10
 }
+
+// --------------------------------------------------------------------------------------------------------------------
+
 type gna<T> = <F extends string | number>(a: F) => T
 
 const gnas: gna<number> = (a) => Number(a) * 5
 gnas(1)
 
+// --------------------------------------------------------------------------------------------------------------------
+
 type T = {
   name: string
   age: number
 }
-
 type U = {
   name: string
 }
-
-type asass = Exclude<keyof T, keyof U>
+type asass = Exclude<keyof T, keyof U> // Exclude将2个类型定义中相同的类型进行排除只保留剩下的
 const asja: asass = 'age'
 
-window.MyNamespace = 123
-
-interface Developer {
-  name?: string
-}
-
-const developer: Developer = {}
-developer.name = 'semlinker'
-
-interface Events {
-  [x: string]: number
-}
+// --------------------------------------------------------------------------------------------------------------------
 
 type as = {
   foo: string
 }
-
-type s = keyof number
-
 const kk: as = { foo: 'foo' }
-
 const Mit = mitt<as>()
-type keys = Recordcs<number, unknown>
 
+// --------------------------------------------------------------------------------------------------------------------
+
+type keys = Record<number, unknown>
 const asa: keys = {
   1: 123
 }
+//        👇1.1这一块的泛型是必传泛型的   👇1.2这一块泛型可以不传泛型 不写的话默认为keys类型
+type getN<T extends number> = <K extends keys>(n: K) => T
 
-type getN<T extends keys> = (n: T) => void
+//                 👇1.1必传泛型
+const getNs: getN<number> = (n) => 123
 
-const getNs: getN<Events> = (n) => {}
-
+//  👇1.2可以不传泛型
 getNs({ 1: 123 })
 
-type Recordcs<K extends keyof any, T> = {
-  [P in K]: T
-}
+// --------------------------------------------------------------------------------------------------------------------
 
-declare module 'vue' {
-  export interface ComponentCustomProperties {
-    $Bus: typeof Mit
-  }
-}
 
 // infer可以抽取某个TS类型定义中的类型
 // 例子1
@@ -126,13 +115,12 @@ type Func = (dog: IDog) => void
 type Param = ParamType<Func> // IDog
 type TypeString = ParamType<string> //string
 
-type jsdk<T> = T extends Array<any> ? T[number] : T
 
 type Type<T> = T extends any[] ? T[number] : T
 type test = Type<string[]>
 type test2 = Type<string>
 
-const ka: test = '1'
+// --------------------------------------------------------------------------------------------------------------------
 
 // 1.1 获取数组每个元素的类型
 const strArr = [{ name: 123 }, 123, 'abc']
@@ -152,12 +140,12 @@ type test1<T> = T[number]
 
 const fruits = [1, 2] as const // as const 可以将数组中每一项转成字面量类型
 // 字面量类型定义方式如：type fafaf = [1,2,3]  字面量类型其实就是固定死的格式类型
-type asaaf = (typeof fruits)[number] // 获取数组中每个下标的元素会自动转成联合类型
+type asaaf = typeof fruits[number] // 获取数组中每个下标的元素会自动转成联合类型
 
 
 // Record<K, T> 定义对象键值类型
 // K传入的对象key值的联合类型，T对象属性value的类型
-type af = Record<(typeof fruits)[number], boolean>
+type af = Record<typeof fruits[number], boolean>
 type peoso = Record<string | number, string>
 const assca: peoso = {
   name: '123',
@@ -194,8 +182,17 @@ function add(number: number): number {
 }
 type addReturnType = ReturnType<typeof add>
 
-// 事件总线
+// --------------------------------------------------------------------------------------------------------------------
+
+declare module 'vue' {
+  export interface ComponentCustomProperties {
+    $Bus: typeof Mit
+  }
+}
+// 全局事件总线
 app.config.globalProperties.$Bus = Mit
+
+// --------------------------------------------------------------------------------------------------------------------
 
 app.use(createPinia())
 app.use(router)

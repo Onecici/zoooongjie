@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   modules: ['@element-plus/nuxt'],// 第三方nuxt版本UI或组件库引入
-  modulesDir: ["~/modules/index.js"], // defineNuxtModule模块引入
+  modulesDir: ["~/modules/index.js"], // 自定义模块---defineNuxtModule模块引入
   telemetry: false,
   app: {
     head: {
