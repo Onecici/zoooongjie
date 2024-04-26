@@ -183,7 +183,7 @@ function add(number: number): number {
 type addReturnType = ReturnType<typeof add>
 
 // --------------------------------------------------------------------------------------------------------------------
-
+// 定义app.config.globalProperties属性类型方法
 declare module 'vue' {
   export interface ComponentCustomProperties {
     $Bus: typeof Mit
