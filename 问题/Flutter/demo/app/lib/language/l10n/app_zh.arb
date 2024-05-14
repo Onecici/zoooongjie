@@ -1,0 +1,12 @@
+{
+    "@@locale": "zh",
+    "appVersion": "版本号: {version}",
+    "@appVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }  
+    },
+    "title": "选项卡"
+}
