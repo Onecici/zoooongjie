@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 生成北京时区时间戳，不受用户本地时区影响
+        function getTime8(time) {
+            // 东8区，东时区记做正数
+            let zoneOffset = 8;
+            // 算出时差,并转换为毫秒：
+            let offset = new Date().getTimezoneOffset() * 60 * 1000;
+            // 此时东8区的时间
+            let currentZoneDate = new Date(Number(time) + offset + zoneOffset * 60 * 60 * 1000);
+            return new Date(currentZoneDate).getTime()
+        }
+
+        // 获取时间戳
+        const time = new Date('Sun, 26 May 2024 06:35:13 GMT').getTime()
+        // 获取北京时区的时间对象
+        console.log(new Date(getTime8(time)));
+    </script>
+</body>
+
+</html>

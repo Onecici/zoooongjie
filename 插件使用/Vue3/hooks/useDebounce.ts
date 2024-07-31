@@ -4,8 +4,8 @@ interface useDebounceType<T> {
   (...args: T[]): void | Promise<void>
 }
 export default function useDebounce<T>(callback: useDebounceType<T>, delay: number) {
-  let timer: NodeJS.Timeout | null = null
-  return function f(_this: void, ...args: T[]): void {
+  let timer: number | null = null
+  return function f(_this: Object | null, ...args: T[]): void {
     timer && clearTimeout(timer)
     timer = setTimeout(() => {
       console.log(args)

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+        name="viewport" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .game_wrap {
+        display: flex;
+        height: 80px;
+        box-sizing: content-box;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, .5) inset
+    }
+
+    .game_item {
+        flex: 1;
+        height: 80px;
+        float: left;
+        border-left: 5px solid #ffcc21
+    }
+
+    .game_item:first-child {
+        border-left: none
+    }
+
+    .game_item li {
+        list-style: none;
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        position: relative;
+        font-size: 30px;
+    }
+</style>
+
+<body>
+    <div class="game_wrap">
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+        <div class="game_item">
+            <ul></ul>
+        </div>
+    </div>
+    <button id="btn"
+        style="background: #111;border: none;padding: 10px 20px;color: #fff;font-size: 16px;cursor: pointer;margin: 10px;">开始</button>
+</body>
+<script>
+    const LuckGame = (function (win, doc) {
+        class Luck {
+            constructor(obj) {
+                this.setting = {
+                    len: 5,  //奖品个数
+                    speed: 5000, //滚动时间
+                    circle: 5, //循环几圈
+                };
+                this.extend(this.setting, obj);
+                this.$ul = doc.querySelectorAll('.game_wrap ul');
+                this.$height = doc.querySelector('.game_item').offsetHeight;
+                this.setList();
+            }
+            setList() {
+                //填充li
+                let html = '';
+                for (let n = 0; n < this.setting.circle; n++) {
+                    for (let i = 0; i < this.setting.len; i++) {
+                        html += '<li>' + i + '</li>'; //图片这里自己添加img以及修改样式
+                    };
+                };
+                [].forEach.call(this.$ul, (o, i) => {
+                    o.innerHTML = html;
+                    //设置默认随机显示
+                    o.style['transform'] = o.style['-webkit-transform'] = 'translate(0px, -' + Math.floor(Math.random() * this.setting.len) * this.$height + 'px) translateZ(0px)';
+                });
+            }
+            //开始抽奖动画
+            
+            /**
+             * @param arr 后端返回的开奖结果
+             * @param fn 动画滚动执行完毕后的回调
+            */
+            start(arr, fn) {
+                let that = this, countNum = 0;
+                [...that.$ul].forEach((o, i) => {
+                    // 使用定时器对每格延迟执行transition效果
+                    setTimeout(() => {
+                        // len表示每格滚动一圈一组元素
+
+                        // 设置总转动圈数值为了触发transition效果
+                        // 解析：arr[i] + that.setting.len * (that.setting.circle - 1) 
+                        // 因为arr[i]获取到的有可能为0所以需要加上that.setting.len否则 * (that.setting.circle - 1) 就会导致出现0的情况 这里 - 1 是因为前面加上了that.setting.len相当于提前转了一圈
+                        // 最后 * that.$height 得到最终滚动高度
+                        var circleSum = (arr[i] + that.setting.len * (that.setting.circle - 1)) * that.$height;
+                        console.log(circleSum);
+                        o.style['-webkit-transition'] = that.setting.speed + 'ms ease'; // 设置转动速度
+                        o.style['-webkit-transform'] = 'translate(0px, -' + circleSum + 'px) translateZ(0px)'
+                    }, i * 300);
+
+                    // 监听每个game_item中ul上的translate动画效果执行完毕事件
+                    o.addEventListener('webkitTransitionEnd', function () {
+                        reset()
+                        countNum++;
+                        if (countNum == that.$ul.length) {
+                            fn && fn();
+                        }
+
+                        // 动画执行完毕后将game_wrap中ul重置为第一圈内的一组元素来显示 如果不重置的话会以最终滚动到的元素来显示
+                        function reset() {
+                            this.style['-webkit-transition'] = '0ms ease';
+                            this.style['-webkit-transform'] = 'translate(0px, -' + arr[i] * that.$height + 'px) translateZ(0px)';
+                        }
+                    }, false);
+                })
+            }
+            extend(n, n1) {
+                for (let i in n1) { n[i] = n1[i] };
+            }
+        }
+        return Luck;
+    })(window, document);
+</script>
+<script>
+    var game = new LuckGame({
+        len: 10,
+        speed: 2000,
+        circle: 10,
+    });
+    btn.onclick = function () {
+        game.start([0, 1, 1, 1, 1, 1, 2, 5, 6, 9], function () {
+            // 中奖后回调
+        })
+    }
+
+
+</script>
+
+</html>

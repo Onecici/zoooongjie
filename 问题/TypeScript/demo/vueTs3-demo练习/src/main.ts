@@ -189,6 +189,7 @@ declare module 'vue' {
     $Bus: typeof Mit
   }
 }
+
 // 全局事件总线
 app.config.globalProperties.$Bus = Mit
 
