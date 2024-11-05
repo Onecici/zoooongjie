@@ -5,9 +5,9 @@ const xlsx = require('node-xlsx').default;
 // 1-1. 将每个项目统计每月的xlsx文件放入All文件夹下
 
 // 1-2. xlsx文件名称集合
-const list = ['djGameH5', 'djGameH5New', 'djGameH5Panda', 'djLive', 'ant_animation_live', 'djVideoControl', 'djAdmin', 'djCEndExample', 'djUserPanda', 'djUserNew', 'djMerchantAdmin', 'djUser']
+const list = ['djGameH5New', 'djGameH5Panda', 'djLive', 'ant_animation_live', 'djVideoControl', 'djAdmin', 'djCEndExample', 'djUserPanda', 'djUserNew', 'djMerchantAdmin']
 // 1-3. xlsx文件月份集合
-const monthArr = [10, 11, 12]
+const monthArr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 var obj = {}
 list.forEach(item => {
     monthArr.forEach(month => {

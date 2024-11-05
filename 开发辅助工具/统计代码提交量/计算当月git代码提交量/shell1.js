@@ -3,15 +3,15 @@ const dayjs = require('dayjs')
 const fs = require('fs')
 const path = require('path')
 const xlsx = require('node-xlsx').default;
-const month = 10 // 月份
-const year = 2023
+const month = 1 // 月份
+const year = 2024
 const day = new Date(year, month, 0)
 const totalDay = day.getDate() // 获取7月一共几天
 const dayList = new Array(totalDay).fill(1).map((item, index) => {
     const today = dayjs().set('year', year).set('month', month - 1).date(index + 1)
     return today.format('YYYY-MM-DD')
 })
-const userList = ['boyd','baird', 'Z9-dagu', 'ledron','smallt', 'Oneci' , 'jermy' , 'donnie']
+const userList = ['boyd','baird', 'Z9-dagu', 'ledron','smallt', 'Oneci' , 'jermy' , 'donnie', 'djharish', 'reborn']
 const userMap = {}
 const result = [
     ['用户名', '时间', '次数', '总行数', '添加行数', '删除行数']

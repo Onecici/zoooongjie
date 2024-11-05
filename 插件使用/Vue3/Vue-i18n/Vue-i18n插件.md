@@ -36,4 +36,6 @@ app.use(i18n)
 
 
 
+![image-20240902154616022](./assets/image-20240902154616022.png)
+
 详情https://kazupon.github.io/vue-i18n/zh/
