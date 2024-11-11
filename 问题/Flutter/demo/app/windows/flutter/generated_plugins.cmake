@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  url_launcher_windows
+  video_plugin
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

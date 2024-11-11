@@ -1,3 +1,4 @@
+import 'package:app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class Tab6 extends StatefulWidget {
@@ -45,9 +46,9 @@ class _MySliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
     print('shrinkOffset = $shrinkOffset overlapsContent = $overlapsContent');
     return Container(
       alignment: Alignment.center,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/2.png"),
+          image: Assets.a1.provider(),
           fit: BoxFit.cover,
         ),
       ),
@@ -56,7 +57,7 @@ class _MySliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   // 以下写法是SliverPersistentHeaderDelegate父类中约定好的方法需要在子类中实现
   // 只要加上了 @override 就是重写父类的属性或方法
-  
+
   // 重写maxExtent最大高度
   @override
   double get maxExtent => _maxExtent;

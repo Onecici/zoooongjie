@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .b {
+            width: 10px;
+        }
+        .a {
+            width: 10px;
+            height: 10px;
+            transform: translateX(10px);
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">clicke</button>
+    <script>
+        btn.onclick = () => {
+            // hi://webview 是H5和flutter一起约定的固定跳转方式
+            document.location = 'hi://webview?id=12655'
+        }
+    </script>
+</body>
+</html>

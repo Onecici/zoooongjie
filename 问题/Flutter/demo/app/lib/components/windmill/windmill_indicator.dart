@@ -19,7 +19,7 @@ class WindmillIndicator extends StatefulWidget {
     this.direction = RotationDirection.clockwise,
   })  : assert(speed > 0),
         assert(size >
-            0); // assert用来进行条件判断 如果该条件不满足，那么程序将抛出一个异常。这可以帮助开发人员在代码中验证假设和调试时检查程序的正确性。
+            0); // assert用来进行条件判断 只有条件不满足时就会在控制台抛出错误
 
   @override
   State<WindmillIndicator> createState() => _WindmillIndicatorState();
@@ -66,12 +66,13 @@ class AnimatedWindmill extends AnimatedWidget {
   final double size;
   final direction;
   final Animation<double> animation;
+
   const AnimatedWindmill({
     super.key,
     required this.animation,
     required this.direction,
     this.size = 50.0,
-  }) : super(listenable: animation); // 将animation赋值给listenable
+  }) : super(listenable: animation); // 将animation赋值给listenable 因为AnimatedWindmill需要初始化调用，但又继承了AnimatedWidget类而这个类中有一个listenable必传属性所以需要调用super()初始化AnimatedWidget类
 
   @override
   Widget build(BuildContext context) {

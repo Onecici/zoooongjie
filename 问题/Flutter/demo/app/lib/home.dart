@@ -1,5 +1,25 @@
+import 'package:app/Tabs/animation.dart';
+import 'package:app/Tabs/data_sharing.dart';
+import 'package:app/Tabs/event_bus.dart';
+import 'package:app/Tabs/event_loop.dart';
+import 'package:app/Tabs/ScrollToIndexDemoPage2.dart';
+import 'package:app/Tabs/chewie_video.dart';
+import 'package:app/Tabs/fijk_video.dart';
+import 'package:app/Tabs/flutter_easy_refresh.dart';
+import 'package:app/Tabs/get_x.dart';
+import 'package:app/Tabs/provider.dart';
+import 'package:app/Tabs/swiper.dart';
+import 'package:app/Tabs/tab10.dart';
+import 'package:app/Tabs/tab11.dart';
+import 'package:app/Tabs/tab12.dart';
+import 'package:app/Tabs/tab13.dart';
 import 'package:app/Tabs/tab6.dart';
+import 'package:app/Tabs/ChangeLocale.dart';
 import 'package:app/Tabs/tab7.dart';
+import 'package:app/Tabs/tab8.dart';
+import 'package:app/Tabs/tab9.dart';
+import 'package:app/Tabs/video_playr.dart';
+import 'package:app/Tabs/webview.dart';
 import 'package:app/components/windmill/windmill_indicator_demo.dart';
 import 'package:app/language/l10n/gen/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +60,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
 
 // 创建选项卡步骤1-3
-    _tabController = TabController(length: 9, vsync: this); // 设置选项卡的数量和vsync
+    _tabController = TabController(length: 29, vsync: this); // 设置选项卡的数量和vsync
     // 监听_tabController选项卡进入和离开事件
     _tabController.addListener(() {
       // _tabController.animation!.value 是选项卡的索引浮点数 它可以在选项卡离开时获取的是上一次的索引 进入时可以获取当前索引
@@ -73,7 +93,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: Container(
                 width: double.infinity,
                 height: 70,
-                color: Color.fromARGB(255, 175, 236, 236),
+                color: const Color.fromARGB(255, 175, 236, 236),
                 child: Column(
                   children: [
                     Expanded(
@@ -103,6 +123,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           Tab(text: 'Tab 4'),
                           Tab(text: 'Tab 5'),
                           Tab(text: 'Tab 6'),
+                          Tab(text: 'Tab 7'),
+                          Tab(text: 'Tab 8'),
+                          Tab(text: 'Tab 9'),
+                          Tab(text: 'Tab 10'),
+                          Tab(text: 'Tab 11'),
+                          Tab(text: 'Tab 12'),
+                          Tab(text: 'Tab 13'),
+                          Tab(text: '事件总线'),
+                          Tab(text: '轮播图'),
+                          Tab(text: 'Animation'),
+                          Tab(text: 'Widget数据共享'),
+                          Tab(text: 'getX'),
+                          Tab(text: 'ProviderView'),
+                          Tab(text: 'EventLoop'),
+                          Tab(text: 'webview'),
+                          Tab(text: 'FlutterEasyRefresh'),
+                          Tab(text: 'VideoPlayr'),
+                          Tab(text: 'chewie_video'),
+                          Tab(text: 'fijk_video'),
+                          Tab(text: 'ScrollToIndexDemoPage2'),
                           Tab(text: '多语言更改'),
                           Tab(text: 'HeroAnimated'),
                           Tab(text: '大风车'),
@@ -123,6 +163,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Tab4(),
           Tab5(),
           Tab6(),
+          Tab7(),
+          Tab8(),
+          Tab9(),
+          Tab10(),
+          Tab11(),
+          Tab12(),
+          Tab13(),
+          MyEventBus(),
+          MySwiper(),
+          AnimationView(),
+          DataSharing(),
+          GetXViewTest(),
+          ProviderView(),
+          EventLoop(),
+          Webview(),
+          FlutterEasyRefresh(),
+          VideoPlayr(),
+          ChewieVideo(),
+          FijkVideo(),
+          ScrollToIndexDemoPage2(),
           ChangeLocale(),
           HeroAnimated(),
           WindmillIndicatorDemo(),

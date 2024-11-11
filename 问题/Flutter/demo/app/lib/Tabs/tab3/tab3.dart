@@ -1,3 +1,4 @@
+import 'package:app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'tab3_chi.dart';
 
@@ -45,9 +46,11 @@ class _Tab3State extends State<Tab3> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      // decoration属性用于定义容器的装饰
+      decoration: BoxDecoration(
+        // 设置背景图片
         image: DecorationImage(
-          image: AssetImage('assets/2.png'), // 替换为您的图片路径
+          image: Assets.a1.provider(), // 替换为您的图片路径
           fit: BoxFit.contain, // 图片适应方式
         ),
       ),

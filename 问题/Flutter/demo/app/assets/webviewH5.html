@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .b {
+            width: 10px;
+        }
+
+        .a {
+            width: 10px;
+            height: 10px;
+            transform: translateX(10px);
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">URL方式通信</button>
+    <button id="btn2">JavaScriptChannel方式通信</button>
+    <button id="btn3">获取Cookie</button>
+    <div id="dartData"></div>
+    <script>
+        btn.onclick = () => {
+            // hi://webview 是H5和flutter一起约定的固定跳转方式
+            document.location = 'hi://webview?id=12655'
+        }
+        btn2.onclick = () => {
+            // hiData 是H5和flutter一起约定的固定标识
+            hiData.postMessage(JSON.stringify({ id: 15521 }))
+        }
+
+        // 获取cookie
+        btn3.onclick = () => {
+            dartData.innerHTML = document.cookie
+        }
+
+        function getDartParams(data) {
+            dartData.innerHTML = data
+        }
+    </script>
+</body>
+
+</html>

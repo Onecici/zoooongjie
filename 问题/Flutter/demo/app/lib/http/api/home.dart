@@ -8,14 +8,14 @@ class LoginService {
   /// 获取用户数据中心列表
   static Future<List> getDataCenter() async {
     var response = await DioRequest.getInstance().dio.get('/getDataCenter');
-    var data = jsonDecode(response.toString());
+    Map data = jsonDecode(response.toString());
     return data['dataCenterList'];
   }
 
   /// 获取权限列表
   static Future<int> menuNav() async {
     var response = await DioRequest.getInstance().dio.get('/sys/menu/nav');
-    var data = jsonDecode(response.toString());
+    Map data = jsonDecode(response.toString());
     return data['code'];
   }
 }
